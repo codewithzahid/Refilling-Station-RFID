@@ -1,0 +1,10 @@
+RC522 Module      ESP32
+---------------------------------
+SDA               GPIO 21
+SCK               GPIO 18
+MOSI              GPIO 23
+MISO              GPIO 19
+IRQ               Not connected
+GND               GND
+RST               GPIO 5
+3.3V              3.3V
