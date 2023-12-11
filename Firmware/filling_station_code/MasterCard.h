@@ -20,12 +20,13 @@ void cardInitialize() {
   SPI.begin();
   mfrc522.PCD_Init();
   Serial.println("RC522 initialized");
-  Serial.println("Enter your card: ");
-  delay(1000);
+  delay(100);
   // Prepare the security key for the read and write functions.
   for (byte i = 0; i < 6; i++) {
     key.keyByte[i] = 0xFF;
   }
+  delay(2000);
+  Serial.println("Enter your card: ");
 }
 
 void checkUserAccessID() {
@@ -98,5 +99,7 @@ void updateBalance(float currentAmount) {
 
 void checkAvailableBalance() {
   availableBalance = readFloatFromBlock(block);
-  Serial.println(availableBalance);
+  Serial.print("Balance: BDT ");
+  Serial.print(availableBalance);
+  Serial.println();
 }

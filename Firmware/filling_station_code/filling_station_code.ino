@@ -18,13 +18,15 @@ void loop() {
     delay(1000);
     float updatedBalance = availableBalance - 0.5;
     if(updatedBalance <= 15.0 && updatedBalance > 0.0){
-      Serial.println("Pump on but balance is low");
+      digitalWrite(fillingPumpPin, HIGH);
       Serial.println("Balance is Low!");
     }
     else if(updatedBalance <= 0.0){
-      Serial.println("Pump off");
-      Serial.println("You don't have sufficient balance");
+      digitalWrite(fillingPumpPin, LOW);
+      Serial.println("Connection Lost or maybe don't have sufficient balance");
+      clientAcessStatus = false;
     }else{
+      digitalWrite(fillingPumpPin, HIGH);
       Serial.println("Pump on");
       updateBalance(updatedBalance);
     }
