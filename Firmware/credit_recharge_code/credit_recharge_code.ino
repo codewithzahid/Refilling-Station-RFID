@@ -69,20 +69,14 @@ void loop() {
 void rechargeAmounthandleMessage(AdafruitIO_Data *data) {
   const char *stringValue = data->value();
   rechargeAmount = atoi(stringValue);
-  Serial.print("Recharge: ");
-  Serial.print("rechargeAmount");
 }
 
 void rechargehandleMessage(AdafruitIO_Data *data) {
   const char *stringValue = data->value();
   rechargeState = atoi(stringValue);
-  Serial.print("Recharge State: ");
-  Serial.print("rechargeState");
 }
 
 void getUserDatahandleMessage(AdafruitIO_Data *data) {
   const char *stringValue = data->value();
   getUserDataState = atoi(stringValue);
-  Serial.print("User data: ");
-  Serial.print("getUserDataState");
 }
