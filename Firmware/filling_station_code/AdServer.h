@@ -13,6 +13,7 @@ AdafruitIO_WiFi io(IO_USERNAME, IO_KEY, WIFI_SSID, WIFI_PASS);
 AdafruitIO_Feed *remainingCredit = io.feed("remaining-credit");
 AdafruitIO_Feed *lastExpense = io.feed("last-expense");
 AdafruitIO_Feed *StationStatus = io.feed("filling-station-status");
+AdafruitIO_Feed *userData = io.feed("user-data");
 
 bool stationState = true;
 
@@ -22,9 +23,9 @@ void serverInitialization() {
   // Wait for connection
   while (io.status() < AIO_CONNECTED) {
     delay(500);
-    Serial.println("Connecting to Adafruit IO...");
+    Serial.println("Connecting to the server...");
   }
-  Serial.println("Connected to Adafruit IO");
+  Serial.println("Connected to the server");
 }
 
 void putCreditStatusToSever(float currentBalance) {

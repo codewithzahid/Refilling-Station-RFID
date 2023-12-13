@@ -14,6 +14,7 @@ bool balanceChecked = false;
 float availableBalance = 0.0;
 unsigned long lastReadTime = 0;
 byte floatBytes[4];
+bool userAccessDashboard = false;
 
 void cardInitialize() {
   SPI.begin();
@@ -39,6 +40,7 @@ void checkUserAccessID() {
       }
       scanClientInformation(uidString);
       clientAcessStatus = true;
+      userAccessDashboard = true;
     }
   }
 }
@@ -89,12 +91,7 @@ float readFloatFromBlock(int blockNumber) {
 
 
 void rechargeBalance() {
-  Serial.println("> Enter your recharge amount: ");
-  while (!Serial.available()) {
-    delay(100);
-  }
-  float rechargeAmount = Serial.parseFloat();
-  float totalAmount = availableBalance + rechargeAmount;
+  float totalAmount = availableBalance + float(rechargeAmount);
 
   byte floatBytes[4];
   memcpy(floatBytes, &totalAmount, sizeof(float));
@@ -105,6 +102,7 @@ void rechargeBalance() {
   if (writeStatus == MFRC522::STATUS_OK) {
     Serial.print("Recharge prosperous! Now, available balance is: BDT ");
     Serial.print(totalAmount);
+    remainingCredit->save(totalAmount);
     Serial.println();
   } else {
     Serial.println("Oops, something went wrong. Recharge failed!");
