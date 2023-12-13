@@ -22,13 +22,13 @@ void loop() {
     delay(1000);
     float updatedBalance = availableBalance - 0.5;
 
-    if(millis() - lastcheck > 50000){
+    if(millis() - lastcheck > 3000){
       putExpenseToServer(updatedBalance);
       lastcheck = millis();
     }
     if(updatedBalance <= 15.0 && updatedBalance > 0.0){
       digitalWrite(fillingPumpPin, HIGH);
-      if(millis() - lastcheck2 > 50000){
+      if(millis() - lastcheck2 > 3000){
       putStationStatusToServer(1);
       putCreditStatusToSever(updatedBalance);
       lastcheck2 = millis();
@@ -37,7 +37,7 @@ void loop() {
       updateBalance(updatedBalance);
     }
     else if(updatedBalance <= 0.0){
-      if(millis() - lastcheck3 > 50000){
+      if(millis() - lastcheck3 > 3000){
       putStationStatusToServer(0);
       userData->save("Connection Lost or maybe don't have sufficient balance!");
       lastcheck3 = millis();
@@ -46,7 +46,7 @@ void loop() {
       Serial.println("Connection Lost or maybe don't have sufficient balance!");
       clientAcessStatus = false;
     }else{
-      if(millis() - lastcheck4 > 50000){
+      if(millis() - lastcheck4 > 3000){
       putStationStatusToServer(1);
       putCreditStatusToSever(updatedBalance);
       lastcheck4 = millis();
